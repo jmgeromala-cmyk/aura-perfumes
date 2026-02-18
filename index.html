@@ -20,11 +20,19 @@
         .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+        /* NAVIGATION FIX FOR MOBILE */
         nav { background-color: rgba(26, 26, 26, 0.95); color: #E8DCC4; display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
         .logo { font-size: 1.8em; font-weight: bold; letter-spacing: 3px; }
-        .nav-links a { color: #E8DCC4; text-decoration: none; margin: 0 10px; font-size: 0.85em; transition: color 0.3s; text-transform: uppercase; }
+        .nav-links a { color: #E8DCC4; text-decoration: none; margin: 0 10px; font-size: 0.85em; transition: color 0.3s; text-transform: uppercase; white-space: nowrap; }
+        
+        @media (max-width: 600px) {
+            nav { flex-direction: column; padding: 15px; gap: 12px; }
+            .nav-links { display: flex; gap: 15px; justify-content: center; }
+            .nav-links a { margin: 0; font-size: 0.8em; }
+            .hero h1 { font-size: 3.2em; }
+        }
 
-        .hero { background: linear-gradient(135deg, #111 0%, #2a2a2a 100%); color: #E8DCC4; text-align: center; padding: 100px 20px; border-bottom: 4px solid var(--gold); }
+        .hero { background: linear-gradient(135deg, #111 0%, #2a2a2a 100%); color: #E8DCC4; text-align: center; padding: 80px 20px; border-bottom: 4px solid var(--gold); }
         .hero h1 { letter-spacing: 6px; margin: 0; font-size: 4em; }
 
         section { padding: 60px 30px; margin: 50px auto; max-width: 900px; background: white; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.04); }
@@ -48,9 +56,13 @@
         button { background: linear-gradient(135deg, #C5A059 0%, #A38040 100%); color: white; border: none; padding: 14px; cursor: pointer; border-radius: 30px; font-weight: 600; text-transform: uppercase; transition: 0.3s; width: 100%; }
         button:hover { opacity: 0.9; transform: scale(1.02); }
 
+        /* MODALS & INPUTS */
         .modal { display: none; position: fixed; z-index: 2000; padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); }
         .modal-content { margin: auto; display: block; width: 85%; max-width: 400px; border-radius: 25px; background: white; padding: 35px; position: relative; max-height: 85vh; overflow-y: auto;}
         .close-btn { position: absolute; top: 15px; right: 25px; font-size: 32px; cursor: pointer; color: #aaa; }
+        
+        /* APP INSTALL IOS POPUP */
+        #ios-install-modal { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #fff; padding: 25px 20px; box-shadow: 0 -5px 25px rgba(0,0,0,0.15); z-index: 3000; text-align: center; border-radius: 25px 25px 0 0; box-sizing: border-box; }
         
         .receipt-box { background: #fdfaf4; padding: 15px; border-radius: 15px; border: 1px solid rgba(197,160,89,0.3); margin: 15px 0; display: none; }
         .receipt-box p { margin: 5px 0; font-size: 0.85em; display: flex; justify-content: space-between; align-items: center;}
@@ -58,7 +70,6 @@
         input, select, textarea { width: 100%; margin-bottom: 10px; padding: 12px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
         .history-btn { position: fixed; bottom: 85px; right: 20px; background: white; color: var(--dark); border: 1px solid var(--gold); padding: 10px 20px; border-radius: 50px; cursor: pointer; z-index: 998; font-size: 0.8em; box-shadow: 0 4px 15px rgba(0,0,0,0.1); display: none; width: auto;}
-        
         .chat-btn { position: fixed; bottom: 20px; right: 20px; background: #0084FF; color: white; padding: 15px 25px; border-radius: 50px; font-weight: bold; font-size: 1em; cursor: pointer; z-index: 999; box-shadow: 0 4px 20px rgba(0,132,255,0.4); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: transform 0.3s; width: auto;}
         .chat-btn:hover { transform: scale(1.05); }
 
@@ -76,12 +87,18 @@
 
     <nav>
         <div class="logo">AURA</div>
-        <div class="nav-links"><a href="#shop">Shop</a><a href="#track">Track Order</a><a href="#reviews">Reviews</a></div>
+        <div class="nav-links">
+            <a href="#shop">Shop</a>
+            <a href="#track">Track Order</a>
+            <a href="#reviews">Reviews</a>
+        </div>
     </nav>
 
     <header class="hero">
         <h1 class="fade-in">AURA</h1>
-        <p class="fade-in">Premium Fragrances | Baybay City Delivery</p>
+        <p class="fade-in" style="margin-bottom: 30px;">Premium Fragrances | Baybay City Delivery</p>
+        
+        <button id="install-btn" class="fade-in" style="display: none; background: white; color: var(--dark); max-width: 220px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">📱 Install AURA App</button>
     </header>
 
     <button class="history-btn" id="history-btn" onclick="useHistory()">♻️ Autofill Info</button>
@@ -173,6 +190,16 @@
         </div>
     </div>
 
+    <div id="ios-install-modal">
+        <h3 style="margin-top:0; color: var(--dark);">Install AURA App</h3>
+        <p style="font-size: 0.9em; color: #555;">To install this app on your iPhone:</p>
+        <p style="font-size: 0.9em; text-align: left; background: #f9f9f9; padding: 15px; border-radius: 10px;">
+            1. Tap the <strong>Share</strong> icon at the bottom of Safari.<br><br>
+            2. Scroll down and tap <strong>Add to Home Screen</strong> <span style="font-size:1.2em;">+</span>.
+        </p>
+        <button onclick="document.getElementById('ios-install-modal').style.display='none'" style="margin-top:10px;">Got it!</button>
+    </div>
+
     <section id="reviews">
         <h2>Customer Reviews</h2>
         <div id="reviews-list">Loading...</div>
@@ -215,6 +242,30 @@
         const MY_LNG = 124.806623; 
         const FEE_PER_KM = 5;
 
+        // PWA APP INSTALL LOGIC
+        let deferredPrompt;
+        const installBtn = document.getElementById('install-btn');
+        const iosModal = document.getElementById('ios-install-modal');
+
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+
+        if (isIOS && !isStandalone) {
+            installBtn.style.display = 'block';
+            installBtn.onclick = () => { iosModal.style.display = 'block'; };
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
+            installBtn.addEventListener('click', () => {
+                installBtn.style.display = 'none';
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => { deferredPrompt = null; });
+            });
+        });
+
         const obs = new IntersectionObserver((es) => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
@@ -253,7 +304,6 @@
                 navigator.geolocation.getCurrentPosition(p => {
                     const lat = p.coords.latitude, lng = p.coords.longitude;
                     
-                    // Fixed: This creates a clean, standard Google Maps URL
                     userLocationLink = `https://maps.google.com/?q=${lat},${lng}`;
                     
                     const R = 6371; const dLa = (lat-MY_LAT)*Math.PI/180; const dLo = (lng-MY_LNG)*Math.PI/180;
