@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA Perfumes | Premium Fragrances Baybay City</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --gold: #C5A059; --dark: #1A1A1A; --light: #FAFAFA; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: #333; scroll-behavior: smooth; overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        /* Smooth Fade-In Animation Classes */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* Frosted Glass Navigation */
+        nav { background-color: rgba(26, 26, 26, 0.85); color: #E8DCC4; display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(197, 160, 89, 0.2); }
+        .logo { font-size: 1.8em; font-weight: bold; letter-spacing: 3px; }
+        .nav-links a { color: #E8DCC4; text-decoration: none; margin: 0 10px; font-size: 0.85em; transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links a:hover { color: var(--gold); }
+
+        /* Enhanced Hero Section */
+        .hero { background: linear-gradient(135deg, #111 0%, #2a2a2a 100%); color: #E8DCC4; text-align: center; padding: 100px 20px; border-bottom: 4px solid var(--gold); position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(197,160,89,0.1) 0%, transparent 60%); animation: pulse 10s infinite alternate; }
+        .hero h1 { letter-spacing: 6px; margin: 0; font-size: 4em; position: relative; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .hero p { position: relative; font-size: 1.1em; letter-spacing: 1px; opacity: 0.9; }
+
+        @keyframes pulse { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+
+        section { padding: 60px 30px; margin: 50px auto; max-width: 900px; background: white; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.04); }
+        h2 { text-align: center; color: var(--dark); margin-bottom: 40px; font-size: 2.5em; position: relative; }
+        h2::after { content: ''; display: block; width: 60px; height: 3px; background: var(--gold); margin: 15px auto 0; border-radius: 2px; }
+
+        /* Luxury Product Cards */
+        .shop-container { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; align-items: stretch; }
+        .product { display: flex; flex-direction: column; padding: 25px; text-align: center; width: 280px; border-radius: 20px; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(0,0,0,0.02); }
+        .product:hover { transform: translateY(-12px); box-shadow: 0 20px 40px rgba(197, 160, 89, 0.15); border-color: rgba(197, 160, 89, 0.3); }
+        .product img { width: 100%; height: 320px; object-fit: contain; background-color: #fcfcfc; border-radius: 15px; cursor: zoom-in; transition: transform 0.5s; }
+        .product:hover img { transform: scale(1.05); }
+        
+        .scent-profile { font-size: 0.8em; color: var(--gold); font-weight: bold; margin-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
+        .product-desc { color: #666; font-size: 0.9em; margin: 10px 0; }
+        
+        .scent-notes { background: #fdfaf4; padding: 12px; border-radius: 10px; font-size: 0.8em; color: #555; text-align: left; margin-bottom: 15px; border-left: 3px solid var(--gold); flex-grow: 1; }
+        .scent-notes span { font-weight: bold; color: var(--dark); }
+
+        .price { font-size: 1.4em; color: var(--dark); font-weight: 700; margin-bottom: 15px; }
+
+        /* Glowing Buttons */
+        button { background: linear-gradient(135deg, #C5A059 0%, #A38040 100%); color: white; border: none; padding: 14px 28px; cursor: pointer; border-radius: 30px; font-weight: 600; text-transform: uppercase; font-size: 0.85em; letter-spacing: 1px; transition: all 0.3s ease; width: 100%; box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3); }
+        button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(197, 160, 89, 0.5); }
+
+        .faq-item { margin-bottom: 20px; text-align: left; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; transition: all 0.3s; }
+        .faq-item:hover { transform: translateX(5px); }
+        .faq-item h4 { margin: 0 0 8px 0; color: var(--dark); font-size: 1.1em; }
+        .faq-item p { margin: 0; color: #666; font-size: 0.95em; line-height: 1.6; }
+
+        .verified-badge { color: #27ae60; font-size: 0.75em; font-weight: bold; display: inline-flex; align-items: center; gap: 4px; margin-top: 5px; background: #e8f8f5; padding: 2px 8px; border-radius: 10px; }
+        .status-dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+        .status-online { background-color: #2ecc71; box-shadow: 0 0 10px #2ecc71; animation: blink 2s infinite; }
+        @keyframes blink { 50% { opacity: 0.6; } }
+
+        .sticky-order { display: none; position: fixed; bottom: 20px; right: 20px; z-index: 999; width: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3); border-radius: 50px; }
+        @media (max-width: 600px) { .sticky-order { display: block; } .hero h1 { font-size: 2.8em; } }
+
+        .star-input { display: flex; flex-direction: row-reverse; justify-content: center; font-size: 3em; cursor: pointer; gap: 5px; }
+        .star-input input { display: none; }
+        .star-input label { color: #eee; transition: all 0.2s; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .star-input input:checked ~ label, .star-input label:hover, .star-input label:hover ~ label { color: #FFD700; transform: scale(1.1); }
+
+        /* Frosted Glass Modal */
+        .modal { display: none; position: fixed; z-index: 2000; padding-top: 60px; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.3s ease; }
+        .modal.show { opacity: 1; display: block; }
+        .modal-content { margin: auto; display: block; width: 90%; max-width: 420px; border-radius: 25px; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(20px); padding: 35px; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.3); border: 1px solid rgba(197, 160, 89, 0.2); transform: translateY(20px); transition: transform 0.3s ease; }
+        .modal.show .modal-content { transform: translateY(0); }
+        .close-btn { position: absolute; top: 15px; right: 25px; font-size: 32px; cursor: pointer; color: #aaa; transition: color 0.3s; }
+        .close-btn:hover { color: var(--dark); }
+        
+        .review-card { background: #fafafa; padding: 20px; border-radius: 15px; margin-bottom: 15px; text-align: left; border: 1px solid #eee; transition: transform 0.3s; }
+        .review-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        
+        select, input, textarea { width: 100%; margin-bottom: 15px; padding: 14px; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-family: 'Poppins', sans-serif; background: #fdfdfd; transition: border 0.3s; }
+        select:focus, input:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1); }
+        
+        #pin-location-btn { background: #f4f4f4; color: #333; width: 100%; border-radius: 12px; padding: 14px; font-weight: 600; text-transform: none; border: 1px solid #ddd; font-size: 0.95em; margin-bottom: 5px; box-shadow: none; }
+        #pin-location-btn:hover { background: #eaeaea; transform: none; box-shadow: none; }
+        
+        .receipt-box { background: #fdfaf4; padding: 20px; border-radius: 15px; border: 1px solid rgba(197,160,89,0.3); margin-top: 15px; margin-bottom: 20px; display: none; }
+        .receipt-box p { margin: 8px 0; font-size: 0.95em; color: #444; display: flex; justify-content: space-between; align-items: center; }
+        .receipt-total { font-weight: bold; color: var(--dark); font-size: 1.2em !important; border-top: 2px dashed rgba(197,160,89,0.3); padding-top: 12px; margin-top: 10px !important; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">AURA</div>
+        <div class="nav-links">
+            <a href="#shop">Shop</a>
+            <a href="#details">Quality</a>
+            <a href="#faq">FAQ</a>
+            <a href="#reviews">Reviews</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1 class="fade-in">AURA</h1>
+        <p class="fade-in" style="transition-delay: 0.2s;">Premium Fragrances | Baybay City Delivery</p>
+    </header>
+
+    <button class="sticky-order" onclick="window.open('https://m.me/61586519297121', '_blank')">💬 Message Us</button>
+
+    <section id="shop">
+        <h2>Our Collection</h2>
+        <div class="shop-container">
+            <div class="product fade-in">
+                <img src="golden-hour.jpg" onclick="openLightbox(this.src)">
+                <h3>Golden Hour</h3>
+                <div class="scent-profile">🌅 Warm • Luxury • Evening</div>
+                <p class="product-desc">50ml | Inspired by Okada Manila.</p>
+                <div class="scent-notes">
+                    <div><span>Top:</span> Bergamot, Light Citrus</div>
+                    <div><span>Heart:</span> Marine Flora, White Jasmine</div>
+                    <div><span>Base:</span> Warm Wood, Soft Musk</div>
+                </div>
+                <div class="price">₱175.00</div>
+                <button onclick="openOrderForm('Golden Hour', 175)">Order Now</button>
+            </div>
+
+            <div class="product fade-in" style="transition-delay: 0.2s;">
+                <img src="bamboo-zen.jpg" onclick="openLightbox(this.src)">
+                <h3>Bamboo Zen</h3>
+                <div class="scent-profile">🌿 Fresh • Clean • Nature</div>
+                <p class="product-desc">50ml | Inspired by Fresh Bamboo.</p>
+                <div class="scent-notes">
+                    <div><span>Top:</span> Crisp Green Leaves, Aloe</div>
+                    <div><span>Heart:</span> Lush Bamboo Flora</div>
+                    <div><span>Base:</span> Clean Light Musk</div>
+                </div>
+                <div class="price">₱175.00</div>
+                <button onclick="openOrderForm('Bamboo Zen', 175)">Order Now</button>
+            </div>
+        </div>
+
+        <div class="fade-in" style="background:#fdfaf4; border:2px dashed var(--gold); padding:40px; text-align:center; border-radius:20px; margin-top:50px;">
+            <h3 style="margin-top:0; font-size: 1.8em;">Duo Bundle Offer</h3>
+            <p style="font-size: 1.1em;">Get 1 Golden Hour + 1 Bamboo Zen for only <strong>₱330.00</strong></p>
+            <button onclick="openOrderForm('Duo Bundle', 330)" style="max-width:300px; padding: 16px;">Claim Bundle Deal</button>
+        </div>
+    </section>
+
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeOrderForm()">×</span>
+            
+            <div id="checkout-step-1">
+                <h2 style="margin-top: 0; font-size: 1.8em; text-align: left; margin-bottom: 5px;">Checkout</h2>
+                <p id="order-item-name" style="color: var(--gold); font-weight: bold; margin-bottom: 25px;">Ordering: </p>
+                
+                <input type="hidden" id="hidden-product">
+                <input type="hidden" id="hidden-price">
+                <input type="text" id="order-name" placeholder="Full Name">
+                <input type="tel" id="order-phone" placeholder="Phone Number (e.g., 09...)">
+                
+                <button type="button" id="pin-location-btn" onclick="getLocation()">📍 Tap to Pin Location & Get Fee</button>
+                <p id="manual-warning" style="font-size: 0.75em; color: #e74c3c; text-align: center; display: none; margin-top:0;">Cannot calculate exact fee without GPS pin. Minimum fee will apply.</p>
+                <textarea id="order-address-fallback" placeholder="Or type your exact address here..." rows="2" style="display: none; margin-top: 10px;"></textarea>
+                
+                <div class="receipt-box" id="receipt-display">
+                    <p><span>Item Price:</span> <span id="display-price">₱0</span></p>
+                    <p><span>Delivery Fee:</span> <span id="display-fee">Calculating...</span></p>
+                    <p class="receipt-total"><span>Total (COD):</span> <span id="display-total">₱0</span></p>
+                </div>
+
+                <button id="confirm-order-btn" onclick="submitOrder()">Confirm Details</button>
+            </div>
+
+            <div id="checkout-step-2" style="display: none; text-align: center; padding: 20px 0;">
+                <h2 style="color: #27ae60; margin-top: 0; font-size: 2em;">✅ Saved!</h2>
+                <p style="color: #666; font-size: 1em; margin-bottom: 30px;">We secured your order details. Tap the button below to open Messenger, then tap the chat bar and hit <strong>PASTE</strong> to send your order.</p>
+                <a href="https://m.me/61586519297121" target="_blank" style="display: block; background: linear-gradient(135deg, #0084FF 0%, #006bce 100%); color: white; padding: 18px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 1.1em; box-shadow: 0 8px 20px rgba(0,132,255,0.3);">
+                    💬 Open Messenger
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item fade-in"><h4>How long does the scent last?</h4><p>Our premium formulations are designed to last 6-8 hours on the skin, and can last up to 24 hours when sprayed on clothes.</p></div>
+        <div class="faq-item fade-in" style="transition-delay: 0.1s;"><h4>Where do you deliver?</h4><p>We currently only deliver within Baybay City. By focusing locally, we ensure you get your perfumes fast and fresh!</p></div>
+        <div class="faq-item fade-in" style="transition-delay: 0.2s;"><h4>What payment methods do you accept?</h4><p>To keep things simple and safe for everyone, we use Cash on Delivery (COD).</p></div>
+    </section>
+
+    <section id="details">
+        <h2>Quality & Care</h2>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px;">
+            <div class="fade-in" style="padding:25px; background:#f9f9f9; border-radius:15px; border-left: 4px solid var(--gold);">
+                <h3 style="margin-top: 0;">Ingredients</h3>
+                <p style="font-size:0.9em; color:#666;">Fragrance Grade Alcohol, Premium Oils, DPG Fixative, Distilled Water.</p>
+            </div>
+            <div class="fade-in" style="transition-delay: 0.2s; padding:25px; background:#f9f9f9; border-radius:15px; border-left: 4px solid var(--gold);">
+                <h3 style="margin-top: 0;">Caution</h3>
+                <p style="font-size:0.9em; color:#666;">Store in a cool place. Avoid direct sunlight. For external use only.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <h2>Customer Reviews</h2>
+        <div id="reviews-list">Loading reviews...</div>
+        <div class="fade-in" style="background:#f9f9f9; padding:30px; border-radius:20px; margin-top:30px; text-align:center; border: 1px solid #eee;">
+            <h3 style="margin-top: 0;">Rate Your Scent</h3>
+            
+            <div class="star-input" onclick="document.getElementById('rev-f').style.display='block'">
+                <input type="radio" id="s5" name="rating" value="5"><label for="s5">★</label>
+                <input type="radio" id="s4" name="rating" value="4"><label for="s4">★</label>
+                <input type="radio" id="s3" name="rating" value="3"><label for="s3">★</label>
+                <input type="radio" id="s2" name="rating" value="2"><label for="s2">★</label>
+                <input type="radio" id="s1" name="rating" value="1"><label for="s1">★</label>
+            </div>
+
+            <div id="rev-f" style="display:none; margin-top:20px; animation: fadeIn 0.5s;">
+                <select id="rev-p"><option>Golden Hour</option><option>Bamboo Zen</option></select>
+                <input type="text" id="rev-n" placeholder="Name (Optional)">
+                <textarea id="rev-c" placeholder="Share your experience..." rows="3"></textarea>
+                <button id="submit-btn" onclick="saveReview()">Submit Review</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="imgModal" class="modal" onclick="if(event.target==this)closeLightbox()"><span class="close-btn" style="color:white; right:30px; top:20px; font-size:40px;" onclick="closeLightbox()">×</span><img class="modal-content" id="modalImg" style="background:transparent; padding:0; border:none; box-shadow:none;"></div>
+
+    <footer style="background:var(--dark); color:#E8DCC4; text-align:center; padding:60px 20px;">
+        <p style="font-weight:bold; color:var(--gold); margin-bottom:20px; font-size: 1.1em;">
+            <span class="status-dot status-online"></span> Cash on Delivery in Baybay City
+        </p>
+        <p><a href="https://www.facebook.com/profile.php?id=61586519297121" target="_blank" style="color:white; text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px;">Visit our Facebook Page</a></p>
+        <p style="font-size:0.85em; opacity:0.6; margin-top: 30px;">© 2026 AURA Perfumes</p>
+    </footer>
+
+    <script>
+        const SHEET_URL = 'https://api.sheetbest.com/sheets/81917155-8fe3-4fec-8f35-d820c6cef33d';
+        let userLocationLink = "";
+        let finalDeliveryFee = 0;
+
+        const MY_LAT = 10.677926;   
+        const MY_LNG = 124.806623;  
+        const BASE_FEE = 15;        
+        const FEE_PER_KM = 5;       
+
+        // SCROLL ANIMATIONS
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in, section h2').forEach(el => { el.classList.add('fade-in'); observer.observe(el); });
+
+        function openOrderForm(product, price) {
+            document.getElementById('hidden-product').value = product;
+            document.getElementById('hidden-price').value = price;
+            document.getElementById('order-item-name').innerText = "Ordering: " + product;
+            
+            document.getElementById('display-price').innerText = `₱${price}`;
+            document.getElementById('display-fee').innerText = "Pending GPS Pin";
+            document.getElementById('display-total').innerText = `₱${price}`;
+            document.getElementById('receipt-display').style.display = 'block';
+
+            document.getElementById('checkout-step-1').style.display = 'block';
+            document.getElementById('checkout-step-2').style.display = 'none';
+            const modal = document.getElementById('orderModal');
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+
+        function closeOrderForm() { 
+            const modal = document.getElementById('orderModal');
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        function calculateDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; 
+            const dLat = (lat2 - lat1) * Math.PI / 180;  
+            const dLon = (lon2 - lon1) * Math.PI / 180; 
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2); 
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            return R * c; 
+        }
+
+        function getLocation() {
+            const btn = document.getElementById("pin-location-btn");
+            const fallback = document.getElementById("order-address-fallback");
+            const warning = document.getElementById("manual-warning");
+            const price = parseInt(document.getElementById('hidden-price').value);
+            
+            btn.innerText = "Locating... ⏳";
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        userLocationLink = `https://maps.google.com/?q=${lat},${lng}`;
+                        
+                        const distanceInKm = calculateDistance(MY_LAT, MY_LNG, lat, lng);
+                        finalDeliveryFee = Math.max(BASE_FEE, Math.round(distanceInKm * FEE_PER_KM));
+                        const total = price + finalDeliveryFee;
+
+                        document.getElementById('display-fee').innerText = `₱${finalDeliveryFee} (${distanceInKm.toFixed(1)} km)`;
+                        document.getElementById('display-total').innerText = `₱${total}`;
+                        
+                        btn.innerText = "✅ Location Pinned! (Fee Updated)";
+                        btn.style.background = "#e8f8f5"; btn.style.color = "#27ae60"; btn.style.border = "1px solid #27ae60";
+                        fallback.style.display = "none"; warning.style.display = "none";
+                    },
+                    function() {
+                        alert("⚠️ We couldn't detect your location. Please type your address below. (Base fee will apply)");
+                        btn.innerText = "❌ Please type your address below";
+                        
+                        finalDeliveryFee = BASE_FEE;
+                        document.getElementById('display-fee').innerText = `₱${finalDeliveryFee} (Manual)`;
+                        document.getElementById('display-total').innerText = `₱${price + finalDeliveryFee}`;
+                        
+                        fallback.style.display = "block"; warning.style.display = "block";
+                    }, { enableHighAccuracy: true, timeout: 10000 }
+                );
+            } else {
+                fallback.style.display = "block"; warning.style.display = "block";
+            }
+        }
+
+        async function submitOrder() {
+            const product = document.getElementById('hidden-product').value;
+            const price = parseInt(document.getElementById('hidden-price').value);
+            const name = document.getElementById('order-name').value;
+            const phone = document.getElementById('order-phone').value;
+            const manualAddress = document.getElementById('order-address-fallback').value;
+            const finalTotal = price + finalDeliveryFee;
+
+            if (!name || !phone) return alert("Please fill in your name and phone number.");
+
+            let finalLocation = userLocationLink !== "" ? "📍 Maps Pin: " + userLocationLink : manualAddress;
+            if (!finalLocation) return alert("Please tap to pin your location or type your address.");
+
+            const confirmBtn = document.getElementById('confirm-order-btn');
+            confirmBtn.innerText = "Saving Order... ⏳";
+            confirmBtn.disabled = true;
+
+            const orderData = { type: "Order", name: name, phone: phone, address: finalLocation, prod: product, date: new Date().toLocaleDateString() };
+            try { await fetch(SHEET_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(orderData) }); } catch(e) {}
+
+            const orderMessage = `🛍️ NEW ORDER\n\nProduct: ${product}\nName: ${name}\nPhone: ${phone}\nLocation: ${finalLocation}\n\nItem: ₱${price}\nDelivery Fee: ₱${finalDeliveryFee}\nTotal to Pay (COD): ₱${finalTotal}`;
+            
+            navigator.clipboard.writeText(orderMessage).then(function() {
+                document.getElementById('checkout-step-1').style.display = 'none';
+                document.getElementById('checkout-step-2').style.display = 'block';
+            }).catch(function() {
+                alert("⚠️ Please screenshot your details. We will now open Messenger.");
+                document.getElementById('checkout-step-1').style.display = 'none';
+                document.getElementById('checkout-step-2').style.display = 'block';
+            });
+            
+            document.getElementById('order-name').value = ""; document.getElementById('order-phone').value = ""; document.getElementById('order-address-fallback').value = ""; userLocationLink = ""; finalDeliveryFee = 0;
+            const btn = document.getElementById("pin-location-btn");
+            btn.innerText = "📍 Tap to Pin My Location & Get Fee"; btn.style.background = "#f4f4f4"; btn.style.color = "#333"; btn.style.border = "1px solid #ddd";
+            confirmBtn.innerText = "Confirm Details"; confirmBtn.disabled = false;
+        }
+
+        function openLightbox(src) { 
+            const modal = document.getElementById("imgModal");
+            document.getElementById("modalImg").src=src; 
+            modal.style.display="block";
+            setTimeout(() => modal.classList.add('show'), 10);
+        }
+        function closeLightbox() { 
+            const modal = document.getElementById("imgModal");
+            modal.classList.remove('show');
+            setTimeout(() => modal.style.display="none", 300);
+        }
+
+        async function displayReviews() {
+            const list = document.getElementById('reviews-list');
+            try {
+                const res = await fetch(SHEET_URL);
+                const data = await res.json();
+                const reviewsOnly = data.filter(row => row.type !== "Order");
+                list.innerHTML = reviewsOnly.length ? '' : '<p style="text-align:center; color:#999;">No reviews yet.</p>';
+                reviewsOnly.slice().reverse().forEach(r => {
+                    const v = r.verified === 'Yes' ? '<div class="verified-badge">✓ Verified Buyer</div>' : '';
+                    const starCount = r.stars ? parseInt(r.stars) : 5; 
+                    list.innerHTML += `<div class="review-card fade-in"><strong>${r.name || "Anonymous"} <small style="background:#eee; padding:2px 8px; border-radius:10px; color:#333; margin-left: 5px;">${r.prod}</small></strong>${v}<div style="color:#FFD700; margin: 5px 0;">${"★".repeat(starCount)}${"☆".repeat(5-starCount)}</div><p style="margin:5px 0; color:#555;">${r.content}</p></div>`;
+                });
+                document.querySelectorAll('.review-card').forEach(el => observer.observe(el));
+            } catch(e) { list.innerHTML = 'Error loading reviews.'; }
+        }
+
+        async function saveReview() {
+            const c = document.getElementById('rev-c').value;
+            const starInput = document.querySelector('input[name="rating"]:checked');
+            if(!c || !starInput) return alert("Please select a star rating and add a review!");
+            
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true; btn.innerText = "Submitting...";
+
+            const nr = { type: "Review", name: document.getElementById('rev-n').value || "Anonymous", content: c, prod: document.getElementById('rev-p').value, stars: starInput.value, date: new Date().toLocaleDateString(), verified: "" };
+            
+            try { await fetch(SHEET_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(nr) }); location.reload(); } 
+            catch(e) { alert("Error submitting. Please try again."); btn.disabled = false; btn.innerText = "Submit Review"; }
+        }
+        
+        displayReviews();
+    </script>
+</body>
+</html>
