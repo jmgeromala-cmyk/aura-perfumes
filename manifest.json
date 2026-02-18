@@ -1,0 +1,15 @@
+{
+  "name": "AURA Perfumes",
+  "short_name": "AURA",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FAFAFA",
+  "theme_color": "#C5A059",
+  "icons": [
+    {
+      "src": "https://imgur.com/a/LxI8J5C", 
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
