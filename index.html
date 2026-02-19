@@ -10,7 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="logo.png">
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root { 
@@ -19,62 +19,103 @@
             --gold-light: #F3E5AB;
             --dark: #0a0a0a; 
             --light: #FDFBF7; 
-            --text-main: #333333;
+            --text-main: #222222;
         }
         
         body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: var(--text-main); scroll-behavior: smooth; overflow-x: hidden; }
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 400; }
 
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 1s ease-out, transform 1s ease-out; }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-        /* FIXED MOBILE NAVIGATION */
-        nav { background-color: rgba(10, 10, 10, 0.95); display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; position: fixed; width: 100%; top: 0; z-index: 1000; backdrop-filter: blur(10px); border-bottom: 1px solid rgba(212, 175, 55, 0.15); box-sizing: border-box; }
-        .logo { font-size: 1.8em; font-weight: 600; letter-spacing: 4px; color: var(--gold); }
-        .nav-links { display: flex; gap: 20px; }
-        .nav-links a { color: #ffffff; text-decoration: none; font-size: 0.8em; letter-spacing: 1px; text-transform: uppercase; opacity: 0.8; transition: 0.3s; }
+        /* FROSTED GLASS NAVIGATION */
+        nav { background-color: rgba(10, 10, 10, 0.85); display: flex; justify-content: space-between; align-items: center; padding: 15px 50px; position: fixed; width: 100%; top: 0; z-index: 1000; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border-bottom: 1px solid rgba(212, 175, 55, 0.15); box-sizing: border-box; }
+        .logo { font-size: 1.8em; font-weight: 600; letter-spacing: 5px; color: var(--gold-light); }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #ffffff; text-decoration: none; font-size: 0.75em; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; transition: 0.4s; }
         .nav-links a:hover { opacity: 1; color: var(--gold); }
         
-        @media (max-width: 600px) {
-            nav { flex-direction: column; padding: 12px; gap: 10px; }
+        @media (max-width: 768px) {
+            nav { flex-direction: column; padding: 15px 20px; gap: 12px; }
             .nav-links { gap: 15px; }
-            .nav-links a { font-size: 0.7em; }
+            .nav-links a { font-size: 0.7em; letter-spacing: 1px; }
         }
 
-        .hero { background: var(--dark); color: white; text-align: center; padding: 160px 20px 100px; border-bottom: 2px solid var(--gold); }
-        .hero h1 { letter-spacing: 8px; margin: 0; font-size: 3.5em; text-transform: uppercase; color: var(--gold-light); }
-        .hero p { font-size: 1em; letter-spacing: 2px; color: #ccc; margin-bottom: 30px; }
+        /* CINEMATIC HERO SECTION */
+        .hero { position: relative; background: radial-gradient(ellipse at bottom, #1a1a1a 0%, #000000 100%); color: white; text-align: center; padding: 180px 20px 120px; border-bottom: 1px solid rgba(212,175,55,0.3); overflow: hidden; }
+        .hero h1 { position: relative; z-index: 2; letter-spacing: 12px; margin: 0 0 10px 0; font-size: 4em; text-transform: uppercase; background: linear-gradient(135deg, #fff 0%, var(--gold) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { position: relative; z-index: 2; font-size: 1em; letter-spacing: 3px; color: #aaa; margin-bottom: 40px; text-transform: uppercase; }
+        
+        /* ELEGANT GOLD DUST */
+        .particles-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .particle { position: absolute; background: var(--gold-light); border-radius: 50%; opacity: 0; animation: floatUp 8s infinite linear; box-shadow: 0 0 8px rgba(243, 229, 171, 0.6); }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
 
-        button, .btn-primary { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: white; border: none; padding: 15px 30px; cursor: pointer; border-radius: 50px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; width: 100%; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2); }
-        button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
+        /* GLOWING BUTTONS */
+        button, .btn-primary { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: white; border: none; padding: 16px 35px; cursor: pointer; border-radius: 50px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.4s ease; width: 100%; box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2); font-size: 0.85em; }
+        button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5); filter: brightness(1.1); }
 
-        section { padding: 80px 20px; margin: 0 auto; max-width: 1100px; }
-        h2 { text-align: center; margin-bottom: 50px; font-size: 2.5em; letter-spacing: 2px; position: relative; }
-        h2::after { content: ''; display: block; width: 50px; height: 2px; background: var(--gold); margin: 20px auto 0; }
+        .btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-bottom: 15px; box-shadow: none; }
+        .btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
 
+        section { padding: 90px 20px; margin: 0 auto; max-width: 1100px; }
+        h2 { text-align: center; margin-bottom: 60px; font-size: 2.8em; letter-spacing: 2px; color: var(--dark); position: relative; }
+        h2::after { content: ''; display: block; width: 40px; height: 2px; background: var(--gold); margin: 20px auto 0; }
+
+        /* REFINED PRODUCT CARDS */
         .shop-container { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
-        .product { position: relative; display: flex; flex-direction: column; padding: 30px; text-align: center; width: 320px; border-radius: 25px; background: #fff; box-shadow: 0 15px 40px rgba(0,0,0,0.04); border: 1px solid #eee; transition: 0.4s ease; }
-        .product:hover { transform: translateY(-10px); }
+        .product { position: relative; display: flex; flex-direction: column; padding: 35px; text-align: center; width: 320px; border-radius: 20px; background: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.03); border: 1px solid rgba(212, 175, 55, 0.1); transition: all 0.5s ease; }
+        .product:hover { transform: translateY(-12px); border-color: var(--gold); box-shadow: 0 25px 60px rgba(212, 175, 55, 0.15); }
 
-        /* FIXED SCENT PROFILE GLITCH */
-        .img-container { position: relative; width: 100%; height: 320px; border-radius: 15px; overflow: hidden; margin-bottom: 25px; background: #fafafa; }
-        .img-container img { width: 100%; height: 100%; object-fit: contain; }
+        .img-container { position: relative; width: 100%; height: 320px; border-radius: 12px; overflow: hidden; margin-bottom: 25px; background: #fafafa; display: flex; align-items: center; justify-content: center; }
+        .img-container img { width: 90%; height: 90%; object-fit: contain; transition: 0.7s; }
+        .product:hover .img-container img { transform: scale(1.05); }
         
-        .notes-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(8px); display: flex; flex-direction: column; justify-content: center; padding: 30px; box-sizing: border-box; opacity: 0; transition: 0.4s ease; pointer-events: none; }
+        .notes-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(5px); display: flex; flex-direction: column; justify-content: center; padding: 30px; box-sizing: border-box; opacity: 0; transition: 0.4s ease; pointer-events: none; }
         .product:hover .notes-overlay { opacity: 1; pointer-events: auto; }
+        .notes-overlay h4 { margin: 0 0 15px; color: var(--gold-dark); font-size: 1.1em; letter-spacing: 2px; text-transform: uppercase; }
+        .notes-overlay p { margin: 8px 0; font-size: 0.9em; color: #555; line-height: 1.6; }
 
-        .price { font-size: 1.6em; color: var(--dark); font-weight: 500; margin: 20px 0; font-family: 'Playfair Display', serif; }
+        .product h3 { margin: 0; font-size: 1.8em; color: var(--dark); letter-spacing: 1px; }
+        .product p { color: #888; font-weight: 300; font-size: 0.9em; margin: 10px 0 20px; }
+        .price { font-size: 1.8em; color: var(--dark); font-weight: 500; margin-bottom: 25px; font-family: 'Playfair Display', serif; }
 
-        input, select, textarea { width: 100%; margin-bottom: 15px; padding: 16px; border: 1px solid #ddd; border-radius: 12px; box-sizing: border-box; font-family: 'Poppins'; background: #fcfcfc; }
-        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: #fff; padding: 40px; border-radius: 30px; width: 100%; max-width: 450px; position: relative; max-height: 85vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.2); }
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 28px; cursor: pointer; color: #999; }
+        /* VIP BUNDLE BOX */
+        .bundle-box { background: linear-gradient(135deg, #ffffff 0%, #faf8f2 100%); border: 1px solid rgba(212, 175, 55, 0.4); padding: 60px 40px; text-align: center; border-radius: 20px; margin-top: 70px; box-shadow: 0 20px 50px rgba(212, 175, 55, 0.05); position: relative; overflow: hidden; }
+        .bundle-box::before { content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--gold-light); opacity: 0.15; border-radius: 50%; filter: blur(40px); }
+        .bundle-box h3 { margin-top: 0; font-size: 2.5em; color: var(--dark); letter-spacing: 1px; }
+        .bundle-box p { font-size: 1.1em; color: #666; margin-bottom: 35px; line-height: 1.6; }
+
+        /* INPUTS & MODALS */
+        input, select, textarea { width: 100%; margin-bottom: 15px; padding: 18px 20px; border: 1px solid #eaeaea; border-radius: 12px; box-sizing: border-box; font-family: 'Poppins', sans-serif; background: #fdfdfd; font-size: 0.9em; transition: 0.3s; color: var(--dark); }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 4px rgba(212,175,55,0.1); }
         
-        .receipt-box { background: #f9f9f9; padding: 20px; border-radius: 15px; margin: 20px 0; border: 1px solid #eee; }
-        .receipt-box p { margin: 8px 0; font-size: 0.9em; display: flex; justify-content: space-between; color: #666; }
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.4s ease; }
+        .modal.show { opacity: 1; }
+        .modal-content { background: #fff; padding: 45px 35px; border-radius: 25px; width: 100%; max-width: 450px; position: relative; max-height: 85vh; overflow-y: auto; box-shadow: 0 30px 60px rgba(0,0,0,0.4); transform: translateY(20px); transition: transform 0.4s ease; }
+        .modal.show .modal-content { transform: translateY(0); }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 32px; cursor: pointer; color: #bbb; transition: 0.3s; line-height: 1; }
+        .close-btn:hover { color: var(--dark); }
         
-        footer { background: var(--dark); color: #fff; text-align: center; padding: 60px 20px; border-top: 2px solid var(--gold); }
-        .chat-btn { position: fixed; bottom: 30px; right: 30px; background: #0084FF; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 500; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 999; }
+        .receipt-box { background: #fafafa; padding: 20px; border-radius: 15px; margin: 25px 0; border: 1px solid #f0f0f0; }
+        .receipt-box p { margin: 10px 0; font-size: 0.95em; display: flex; justify-content: space-between; color: #555; }
+        
+        /* DATA-DRIVEN LIVE TOAST NOTIFICATION */
+        .toast { position: fixed; bottom: 35px; left: 50%; transform: translateX(-50%) translateY(150%); background: rgba(20, 20, 20, 0.95); backdrop-filter: blur(15px); border: 1px solid rgba(212, 175, 55, 0.3); padding: 12px 25px; border-radius: 50px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 15px; z-index: 1500; opacity: 0; transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1); min-width: 280px; justify-content: center; pointer-events: none; }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .toast-img { width: 12px; height: 12px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 10px var(--gold); animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.7); } 70% { box-shadow: 0 0 0 10px rgba(212,175,55,0); } 100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); } }
+        .toast-text { font-size: 0.85em; color: #fff; line-height: 1.4; letter-spacing: 0.5px; }
+        .toast-text strong { color: var(--gold-light); font-weight: 500; }
+
+        footer { background: var(--dark); color: #fff; text-align: center; padding: 70px 20px; border-top: 1px solid rgba(212,175,55,0.2); margin-top: 40px; }
+        .chat-btn { position: fixed; bottom: 30px; right: 30px; background: #fff; color: var(--dark); border: 1px solid var(--gold); padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 999; font-size: 0.85em; transition: 0.3s; }
+        .chat-btn:hover { background: var(--gold); color: #fff; }
     </style>
 </head>
 <body>
@@ -83,18 +124,43 @@
         <div class="logo">AURA</div>
         <div class="nav-links">
             <a href="#shop">Collection</a>
-            <a href="#track">Track</a>
-            <a href="#reviews">Reviews</a>
+            <a href="#track">Track Status</a>
+            <a href="#reviews">Testimonials</a>
         </div>
     </nav>
 
+    <div id="toast" class="toast">
+        <div class="toast-img"></div>
+        <div class="toast-text" id="toast-msg"></div>
+    </div>
+
     <header class="hero">
+        <div class="particles-container" id="particles"></div>
         <h1 class="fade-in">AURA</h1>
         <p class="fade-in">Premium Fragrances</p>
-        <button id="install-btn" style="display:none; max-width: 250px; margin: 0 auto; background: rgba(255,255,255,0.1); border: 1px solid var(--gold);">📱 Install AURA App</button>
+        <button class="fade-in btn-primary" onclick="startQuiz()" style="max-width: 280px; margin: 0 auto 15px; position: relative; z-index: 2; display: block;">🔍 Find Your Scent</button>
+        <button id="install-btn" style="display:none; max-width: 280px; margin: 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.4); position: relative; z-index: 2;">📱 Install App</button>
     </header>
 
     <a href="https://www.facebook.com/melisa.loreto.2025" target="_blank" class="chat-btn">💬 Concierge</a>
+
+    <div id="quizModal" class="modal">
+        <div class="modal-content" style="text-align: center;">
+            <span class="close-btn" onclick="closeQuiz()">×</span>
+            <div id="quiz-q1">
+                <h3 style="color:var(--gold-dark); margin-top:0; font-size: 2em;">Discover Your Scent</h3>
+                <p style="color:#666; margin-bottom: 30px;">What is your ideal evening vibe?</p>
+                <button class="btn-outline" onclick="nextQuiz('Golden Hour')">Luxurious & Elegant</button>
+                <button class="btn-outline" onclick="nextQuiz('Bamboo Zen')">Fresh & Relaxing</button>
+            </div>
+            <div id="quiz-result" style="display: none;">
+                <h3 style="color:#555; margin-top:0; font-size: 1.1em; letter-spacing: 2px; text-transform: uppercase;">Your Perfect Match</h3>
+                <h2 id="quiz-winner" style="font-family: 'Playfair Display'; font-size: 2.8em; margin: 10px 0; color: var(--gold-dark);"></h2>
+                <p style="color:#666; margin-bottom: 30px; line-height: 1.6;">Based on your aura, this scent will elevate your presence perfectly.</p>
+                <button id="quiz-order-btn" onclick="">Secure It Now</button>
+            </div>
+        </div>
+    </div>
 
     <section id="shop">
         <h2>The Collection</h2>
@@ -103,12 +169,12 @@
                 <div class="img-container">
                     <img src="golden-hour.jpg" alt="Golden Hour">
                     <div class="notes-overlay">
-                        <h4 style="color:var(--gold-dark); letter-spacing: 2px;">Scent Profile</h4>
+                        <h4>Scent Profile</h4>
                         <p><strong>Top:</strong> Bergamot, Citrus<br><strong>Heart:</strong> Jasmine<br><strong>Base:</strong> Wood, Musk</p>
                     </div>
                 </div>
                 <h3>Golden Hour</h3>
-                <p style="color:#777; font-weight: 300;">Inspired by Okada Manila</p>
+                <p>Inspired by Okada Manila</p>
                 <div class="price">₱175.00</div>
                 <button onclick="openOrderForm('Golden Hour', 175)">Purchase Now</button>
             </div>
@@ -117,79 +183,94 @@
                 <div class="img-container">
                     <img src="bamboo-zen.jpg" alt="Bamboo Zen">
                     <div class="notes-overlay">
-                        <h4 style="color:var(--gold-dark); letter-spacing: 2px;">Scent Profile</h4>
+                        <h4>Scent Profile</h4>
                         <p><strong>Top:</strong> Green Leaves<br><strong>Heart:</strong> Lush Bamboo<br><strong>Base:</strong> Light Musk</p>
                     </div>
                 </div>
                 <h3>Bamboo Zen</h3>
-                <p style="color:#777; font-weight: 300;">Inspired by Fresh Bamboo</p>
+                <p>Inspired by Fresh Bamboo</p>
                 <div class="price">₱175.00</div>
                 <button onclick="openOrderForm('Bamboo Zen', 175)">Purchase Now</button>
             </div>
         </div>
+
+        <div class="bundle-box fade-in">
+            <h3>The Signature Duo</h3>
+            <p>Acquire both Golden Hour and Bamboo Zen for a curated price of <strong>₱330.00</strong>.</p>
+            <button onclick="openOrderForm('Duo Bundle', 330)" style="max-width:300px;">Secure The Bundle</button>
+        </div>
     </section>
 
     <section id="track">
-        <h2>Track Order</h2>
-        <div style="background:#fff; padding:50px; border-radius:30px; text-align:center; box-shadow: 0 10px 30px rgba(0,0,0,0.02); max-width: 600px; margin: 0 auto;">
-            <p style="color:#777; margin-bottom:30px;">Enter your 11-digit phone number to track your purchase.</p>
-            <input type="tel" id="track-phone" placeholder="09..." maxlength="11" style="max-width: 300px; margin: 0 auto 20px; display: block; text-align: center;">
-            <button onclick="checkOrderStatus()" style="max-width: 200px;">Check Status</button>
-            <div id="tracker-result" style="margin-top: 30px; display: none; text-align: left;"></div>
+        <h2>Order Status</h2>
+        <div style="background:#fff; padding:60px 40px; border-radius:30px; text-align:center; box-shadow: 0 15px 40px rgba(0,0,0,0.03); max-width: 600px; margin: 0 auto; border: 1px solid #f5f5f5;">
+            <p style="color:#777; margin-bottom:30px;">Enter your 11-digit phone number to track your delivery.</p>
+            <input type="tel" id="track-phone" placeholder="e.g. 09123456789" maxlength="11" style="max-width: 320px; margin: 0 auto 20px; display: block; text-align: center;">
+            <button onclick="checkOrderStatus()" style="max-width: 220px; background: var(--dark);">Track Order</button>
+            <div id="tracker-result" style="margin-top: 35px; display: none; text-align: left;"></div>
         </div>
     </section>
 
     <section id="reviews">
         <h2>Testimonials</h2>
-        <div id="reviews-list">Loading...</div>
-        <div style="background:#fff; padding:40px; border-radius:30px; margin-top:50px; border: 1px solid #eee;">
-            <h3 style="text-align:center; margin-top:0;">Share Your Experience</h3>
+        <div id="reviews-list">
+            <p style="text-align: center; color: #999;">Accessing client experiences...</p>
+        </div>
+        
+        <div style="background:#fff; padding:50px 40px; border-radius:30px; margin-top:60px; border: 1px solid rgba(212,175,55,0.15); box-shadow: 0 20px 50px rgba(0,0,0,0.02);">
+            <h3 style="text-align:center; margin-top:0; font-size: 2em; color: var(--dark);">Share Your Experience</h3>
+            
             <div id="review-verification-step" style="text-align: center;">
-                <input type="tel" id="review-verify-phone" placeholder="Phone Number..." maxlength="11" style="max-width: 280px; text-align: center;">
-                <button onclick="verifyReviewEligibility()" style="max-width: 150px;">Verify Client</button>
+                <p style="color:#777; margin-bottom: 25px; font-size: 0.9em;">Review privileges are exclusive to clients with a delivered order.</p>
+                <input type="tel" id="review-verify-phone" placeholder="Phone Number..." maxlength="11" style="max-width: 300px; margin: 0 auto 20px; text-align: center; display: block;">
+                <button onclick="verifyReviewEligibility()" style="max-width: 200px;">Verify Client</button>
             </div>
+            
             <div id="rev-f" style="display:none; text-align:center;">
-                <select id="rev-p" style="max-width: 300px; margin: 0 auto 20px; display: block;"></select>
-                <div style="font-size: 2.5em; color: #ddd; cursor: pointer; margin-bottom: 20px;" id="star-rating">
+                <p style="color:var(--gold-dark); font-weight:600; margin-bottom: 20px;">✓ Client Verified</p>
+                <select id="rev-p" style="max-width: 350px; margin: 0 auto 20px; display: block;"></select>
+                <div style="font-size: 2.8em; color: #e0e0e0; cursor: pointer; margin-bottom: 25px;" id="star-rating">
                     <span onclick="setStars(1)">★</span><span onclick="setStars(2)">★</span><span onclick="setStars(3)">★</span><span onclick="setStars(4)">★</span><span onclick="setStars(5)">★</span>
                 </div>
                 <input type="hidden" id="rev-s" value="0">
-                <input type="text" id="rev-n" placeholder="Your Name">
-                <textarea id="rev-c" placeholder="Your review..." rows="3"></textarea>
+                <input type="text" id="rev-n" placeholder="Your Name (As it will appear)" style="max-width: 350px; margin: 0 auto 15px; display: block;">
+                <textarea id="rev-c" placeholder="Describe your experience..." rows="4" style="max-width: 350px; margin: 0 auto 25px; display: block; resize: none;"></textarea>
                 <button onclick="saveReview()" style="max-width: 250px;">Submit Review</button>
             </div>
         </div>
     </section>
 
     <footer>
-        <p style="letter-spacing: 5px; font-weight: 600;">A U R A</p>
-        <a href="https://www.facebook.com/melisa.loreto.2025" target="_blank">Visit official page</a>
+        <p style="font-size: 1.5em; letter-spacing: 8px; font-weight: 600; margin: 0 0 15px;">A U R A</p>
+        <a href="https://www.facebook.com/melisa.loreto.2025" target="_blank" style="color: var(--gold); text-decoration: none; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8em;">Connect with us</a>
     </footer>
 
     <div id="orderModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeOrderForm()">×</span>
             <div id="checkout-step-1">
-                <h2 style="margin: 0 0 10px;">Checkout</h2>
-                <p id="order-item-name" style="color:var(--gold-dark); font-weight:600; text-align:center; margin-bottom:25px;"></p>
+                <h2 style="margin: 0 0 10px; font-size: 2.2em;">Checkout</h2>
+                <p id="order-item-name" style="color:var(--gold-dark); font-weight:500; font-size: 1.2em; text-align:center; margin-bottom:30px;"></p>
                 <input type="hidden" id="hidden-product"><input type="hidden" id="hidden-price">
                 <input type="text" id="order-name" placeholder="Full Name">
                 <input type="tel" id="order-phone" placeholder="Phone Number (11 digits)" maxlength="11">
                 <input type="text" id="order-fb" placeholder="Facebook Name (Optional)">
-                <button type="button" onclick="getLocation()" id="pin-btn" style="background:#f4f4f4; color:#333; margin-bottom:15px; box-shadow: none;">📍 Pin Delivery Location</button>
-                <div id="receipt" style="background:#f9f9f9; padding:20px; border-radius:15px; margin-bottom:20px; display:none;">
-                    <p><span>Item:</span> <span id="r-p"></span></p>
-                    <p style="color:var(--gold-dark); font-weight:600; text-align: center; margin: 10px 0; font-size: 1.1em;">✓ FREE Shipping (Baybay City)</p>
-                    <p style="font-weight:bold; border-top:1px solid #ddd; padding-top:10px; margin-top:10px; color: var(--dark);"><span>Total (COD):</span> <span id="r-t"></span></p>
+                <button type="button" onclick="getLocation()" id="pin-btn" style="background:#f4f4f4; color:var(--text-main); margin-bottom:15px; box-shadow: none; border: 1px solid #ddd;">📍 Pin Delivery Location</button>
+                
+                <div id="receipt" style="background:#fafafa; padding:25px; border-radius:15px; margin-bottom:25px; display:none; border: 1px solid #eee;">
+                    <p><span>Item Base:</span> <span id="r-p"></span></p>
+                    <p style="color:var(--gold-dark); font-weight:600; text-align: center; margin: 15px 0; font-size: 1.05em; background: rgba(212,175,55,0.1); padding: 8px; border-radius: 8px;">✓ FREE Shipping (Baybay City)</p>
+                    <p style="font-weight:bold; border-top:1px dashed #ccc; padding-top:15px; margin-top:15px; color: var(--dark); font-size: 1.2em;"><span>Total (COD):</span> <span id="r-t"></span></p>
                 </div>
                 <button id="confirm-btn" onclick="submitOrder()">Place COD Order</button>
             </div>
-            <div id="checkout-step-2" style="display:none; text-align:center; padding: 30px 0;">
-                <div style="font-size:4em; color:var(--gold);">✓</div>
-                <h3>Order Secured</h3>
-                <p style="color:#777;">Thank you. Your order is being processed.</p>
+            
+            <div id="checkout-step-2" style="display:none; text-align:center; padding: 40px 0;">
+                <div style="font-size:4.5em; color:var(--gold); margin-bottom: 15px;">✓</div>
+                <h3 style="font-size: 2em; margin: 0 0 15px;">Order Secured</h3>
+                <p style="color:#666; line-height: 1.6; margin-bottom: 30px;">Thank you. Your order has been securely logged and is being processed.</p>
                 <a href="https://www.facebook.com/melisa.loreto.2025" target="_blank" class="btn-primary" style="display: inline-block; text-decoration: none; margin-bottom: 15px; box-sizing: border-box;">Message on Facebook</a>
-                <button onclick="closeOrderForm()" style="margin-top:20px; background:#333;">Close</button>
+                <button onclick="closeOrderForm()" style="background: var(--dark); box-shadow: none;">Close Window</button>
             </div>
         </div>
     </div>
@@ -198,19 +279,119 @@
         const SHEET_URL = 'https://api.sheetbest.com/sheets/81917155-8fe3-4fec-8f35-d820c6cef33d';
         let userLoc = "";
 
+        // GOLD DUST PARTICLES
+        const pContainer = document.getElementById('particles');
+        for(let i=0; i<35; i++) {
+            let p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.width = Math.random() * 4 + 2 + 'px';
+            p.style.height = p.style.width;
+            p.style.animationDuration = Math.random() * 5 + 5 + 's';
+            p.style.animationDelay = Math.random() * 5 + 's';
+            pContainer.appendChild(p);
+        }
+
+        // ONE MASTER FUNCTION: FETCH REVIEWS & REAL SOCIAL PROOF
+        async function fetchRealData() {
+            try {
+                const res = await fetch(SHEET_URL); 
+                const data = await res.json();
+                
+                // 1. Render Reviews
+                const revs = data.filter(r => r.type === "Review").reverse();
+                document.getElementById('reviews-list').innerHTML = revs.map(r => `<div style="background:#fff; padding:30px; border-radius:20px; margin-bottom:20px; border-left: 4px solid var(--gold); box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+                    <strong style="font-size:1.1em; color:var(--dark);">${r.name}</strong> <span style="font-size:0.75em; background:var(--gold-light); color:var(--dark); padding:3px 8px; border-radius:20px; margin-left:10px; text-transform: uppercase;">✓ Verified</span>
+                    <br><span style="color:var(--gold); font-size: 1.3em; margin: 8px 0; display:inline-block;">${"★".repeat(r.stars)}</span>
+                    <br><span style="font-size:0.85em; color:#999; font-style:italic;">Purchased: ${r.prod}</span>
+                    <p style="margin:15px 0 0; color:#444; line-height:1.7;">"${r.content}"</p>
+                </div>`).join('') || "<p style='text-align:center; color:#999;'>Be the first to share your experience.</p>";
+
+                // 2. Setup Real Social Proof Notifications
+                let realNotifications = [];
+                // Look at the latest 15 entries to keep notifications fresh and authentic
+                const recentData = data.slice(-15); 
+                
+                recentData.forEach(row => {
+                    if(row.type === "Order" && row.prod) {
+                        realNotifications.push(`Someone recently secured <strong>${row.prod}</strong>.`);
+                    } else if(row.type === "Review" && row.stars) {
+                        realNotifications.push(`A client left a <strong>${row.stars}-star</strong> review for ${row.prod}.`);
+                    }
+                });
+
+                // Only start the popup if real data actually exists
+                if(realNotifications.length > 0) {
+                    setInterval(() => {
+                        const toast = document.getElementById('toast');
+                        const randomMsg = realNotifications[Math.floor(Math.random() * realNotifications.length)];
+                        document.getElementById('toast-msg').innerHTML = randomMsg;
+                        toast.style.display = 'flex';
+                        // Small delay to allow display:flex to apply before animating opacity/transform
+                        setTimeout(() => { toast.classList.add('show'); }, 50); 
+                        setTimeout(() => { toast.classList.remove('show'); }, 4500);
+                    }, 18000); // Pops up every 18 seconds
+                }
+
+            } catch(e) { 
+                document.getElementById('reviews-list').innerHTML = "<p style='text-align:center; color:#e74c3c;'>Database connection temporarily unavailable.</p>";
+            }
+        }
+        
+        // Execute the master fetch when page loads
+        fetchRealData();
+
+        // SCROLL ANIMATIONS
         const obs = new IntersectionObserver((entries) => {
             entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
+        // QUIZ LOGIC
+        function startQuiz() {
+            document.getElementById('quiz-q1').style.display = 'block';
+            document.getElementById('quiz-result').style.display = 'none';
+            const modal = document.getElementById('quizModal');
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.classList.add('show'); }, 10);
+        }
+        function closeQuiz() { 
+            const modal = document.getElementById('quizModal');
+            modal.classList.remove('show');
+            setTimeout(() => { modal.style.display = 'none'; }, 400); 
+        }
+        function nextQuiz(scentResult) {
+            document.getElementById('quiz-q1').style.display = 'none';
+            document.getElementById('quiz-winner').innerText = scentResult;
+            const btn = document.getElementById('quiz-order-btn');
+            if(scentResult === 'Golden Hour') {
+                btn.onclick = () => { closeQuiz(); setTimeout(()=>{openOrderForm('Golden Hour', 175);}, 400); };
+            } else {
+                btn.onclick = () => { closeQuiz(); setTimeout(()=>{openOrderForm('Bamboo Zen', 175);}, 400); };
+            }
+            document.getElementById('quiz-result').style.display = 'block';
+        }
+
+        // CHECKOUT LOGIC
         function openOrderForm(p, pr) {
             document.getElementById('hidden-product').value = p;
             document.getElementById('hidden-price').value = pr;
             document.getElementById('order-item-name').innerText = p;
-            document.getElementById('orderModal').style.display = 'flex';
+            
+            document.getElementById('checkout-step-1').style.display = 'block';
+            document.getElementById('checkout-step-2').style.display = 'none';
             document.getElementById('receipt').style.display = 'none';
+            
+            const modal = document.getElementById('orderModal');
+            modal.style.display = 'flex';
+            setTimeout(() => { modal.classList.add('show'); }, 10);
         }
-        function closeOrderForm() { document.getElementById('orderModal').style.display = 'none'; }
+        
+        function closeOrderForm() { 
+            const modal = document.getElementById('orderModal');
+            modal.classList.remove('show');
+            setTimeout(() => { modal.style.display = 'none'; }, 400);
+        }
 
         function getLocation() {
             const btn = document.getElementById('pin-btn');
@@ -218,7 +399,6 @@
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(pos => {
                     const lat = pos.coords.latitude, lng = pos.coords.longitude;
-                    
                     userLoc = `https://www.google.com/maps?q=${lat},${lng}`;
                     const pr = parseInt(document.getElementById('hidden-price').value);
                     
@@ -226,20 +406,20 @@
                     document.getElementById('r-p').innerText = "₱" + pr;
                     document.getElementById('r-t').innerText = "₱" + pr;
                     
-                    btn.innerText = "✓ Location Pinned";
+                    btn.innerText = "✓ Location Secured";
                     btn.style.background = "#f9f6f0";
                     btn.style.color = "var(--gold-dark)";
-                    btn.style.border = "1px solid var(--gold)";
-                }, () => { alert("Turn on GPS"); btn.innerText = "📍 Pin Delivery Location"; });
+                    btn.style.borderColor = "var(--gold)";
+                }, () => { alert("Please ensure GPS/Location Services are enabled."); btn.innerText = "📍 Pin Delivery Location"; });
             }
         }
 
         async function submitOrder() {
             const name = document.getElementById('order-name').value;
             const phone = document.getElementById('order-phone').value;
-            if(!name || phone.length !== 11 || !userLoc) return alert("Fill all details and pin location!");
+            if(!name || phone.length !== 11 || !userLoc) return alert("Please fill in all details and secure your location.");
             
-            const btn = document.getElementById('confirm-btn'); btn.innerText = "Saving... ⏳"; btn.disabled = true;
+            const btn = document.getElementById('confirm-btn'); btn.innerText = "Processing... ⏳"; btn.disabled = true;
             const id = "AURA-" + Math.floor(Math.random()*100000);
             const total = parseInt(document.getElementById('hidden-price').value);
             
@@ -249,23 +429,26 @@
                 await fetch(SHEET_URL, { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(data)});
                 document.getElementById('checkout-step-1').style.display = 'none';
                 document.getElementById('checkout-step-2').style.display = 'block';
-            } catch(e) { alert("Error saving order."); btn.innerText = "Place COD Order"; btn.disabled = false; }
+                btn.innerText = "Place COD Order"; btn.disabled = false;
+            } catch(e) { alert("Error saving order. Please check your connection."); btn.innerText = "Place COD Order"; btn.disabled = false; }
         }
 
+        // TRACKING LOGIC
         async function checkOrderStatus() {
             const ph = document.getElementById('track-phone').value;
             const resBox = document.getElementById('tracker-result');
-            if(ph.length !== 11) return alert("Enter 11 digits");
-            resBox.style.display = 'block'; resBox.innerHTML = "Searching... ⏳";
+            if(ph.length !== 11) return alert("Please enter a valid 11-digit number.");
+            resBox.style.display = 'block'; resBox.innerHTML = "Accessing records... ⏳";
             try {
                 const res = await fetch(SHEET_URL); const data = await res.json();
                 const orders = data.filter(r => r.type === "Order" && r.phone.toString().includes(ph.replace(/^0+/, ''))).reverse();
                 if(orders.length > 0) {
-                    resBox.innerHTML = orders.map(o => `<div style="background: #fafafa; padding: 15px; border-radius: 12px; margin-bottom: 10px; border-left: 4px solid var(--gold);"><strong>${o.prod}</strong><br><small>Status:</small> <span style="color:var(--gold-dark); font-weight:600;">${o.status}</span></div>`).join('');
-                } else { resBox.innerHTML = "No orders found."; }
+                    resBox.innerHTML = orders.map(o => `<div style="background: #fafafa; padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid var(--gold);"><strong>${o.prod}</strong><br><small style="color:#888;">Order ID: ${o.order_id}</small><br><span style="display:inline-block; margin-top:5px; color:var(--gold-dark); font-weight:600; text-transform:uppercase; letter-spacing:1px; font-size:0.85em;">Status: ${o.status}</span></div>`).join('');
+                } else { resBox.innerHTML = "<span style='color: #e74c3c;'>No active orders found for this number.</span>"; }
             } catch(e) { resBox.innerHTML = "Error loading data."; }
         }
 
+        // REVIEW LOGIC
         async function verifyReviewEligibility() {
             const ph = document.getElementById('review-verify-phone').value;
             try {
@@ -275,8 +458,8 @@
                     const sel = document.getElementById('rev-p'); sel.innerHTML = [...new Set(valid.map(v => v.prod))].map(p => `<option>${p}</option>`).join('');
                     document.getElementById('review-verification-step').style.display = 'none';
                     document.getElementById('rev-f').style.display = 'block';
-                } else { alert("Only delivered orders can be reviewed."); }
-            } catch(e) { alert("Error verifying."); }
+                } else { alert("We could not find a delivered order for this number."); }
+            } catch(e) { alert("Verification error."); }
         }
 
         function setStars(n) {
@@ -288,20 +471,14 @@
         async function saveReview() {
             const s = document.getElementById('rev-s').value;
             const c = document.getElementById('rev-c').value;
-            if(s == 0 || !c) return alert("Rate and comment!");
+            if(s == 0 || !c) return alert("Please select a star rating and write a comment.");
+            const btn = event.target; btn.innerText = "Submitting..."; btn.disabled = true;
             const data = { type:"Review", date: new Date().toLocaleDateString(), name: document.getElementById('rev-n').value || "Anonymous", prod: document.getElementById('rev-p').value, stars: s, content: c };
-            await fetch(SHEET_URL, { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(data)});
-            location.reload();
-        }
-
-        async function loadReviews() {
             try {
-                const res = await fetch(SHEET_URL); const data = await res.json();
-                const revs = data.filter(r => r.type === "Review").reverse();
-                document.getElementById('reviews-list').innerHTML = revs.map(r => `<div style="background:#fff; padding:25px; border-radius:20px; margin-bottom:20px; border-left: 5px solid var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.02);"><strong>${r.name}</strong> <small style="color:#999;">(${r.prod})</small><br><span style="color:var(--gold); font-size: 1.2em;">${"★".repeat(r.stars)}</span><p style="margin:10px 0 0; color:#555; line-height:1.6;">${r.content}</p></div>`).join('') || "No reviews yet.";
-            } catch(e) {}
+                await fetch(SHEET_URL, { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(data)});
+                location.reload();
+            } catch(e) { alert("Submission failed."); btn.innerText = "Submit Review"; btn.disabled = false; }
         }
-        loadReviews();
     </script>
 </body>
 </html>
