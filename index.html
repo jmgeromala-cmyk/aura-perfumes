@@ -60,10 +60,10 @@
         button, .btn-primary { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); color: white; border: none; padding: 16px 35px; cursor: pointer; border-radius: 50px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; transition: all 0.4s ease; width: 100%; box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2); font-size: 0.85em; }
         button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5); filter: brightness(1.1); }
 
-        .btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-bottom: 15px; box-shadow: none; padding: 12px 20px; }
-        .btn-outline:hover { background: rgba(212, 175, 55, 0.1); }
+        .btn-outline { background: transparent; border: 1px solid var(--gold); color: var(--gold); margin-bottom: 10px; box-shadow: none; padding: 12px 20px; transition: 0.3s; }
+        .btn-outline:hover { background: rgba(212, 175, 55, 0.1); color: var(--gold-dark); }
 
-        section { padding: 90px 20px; margin: 0 auto; max-width: 1100px; }
+        section { padding: 90px 20px; margin: 0 auto; max-width: 1200px; }
         h2 { text-align: center; margin-bottom: 60px; font-size: 2.8em; letter-spacing: 2px; color: var(--dark); position: relative; }
         h2::after { content: ''; display: block; width: 40px; height: 2px; background: var(--gold); margin: 20px auto 0; }
 
@@ -84,12 +84,6 @@
         .product h3 { margin: 0; font-size: 1.8em; color: var(--dark); letter-spacing: 1px; }
         .product p { color: #888; font-weight: 300; font-size: 0.9em; margin: 10px 0 20px; }
         .price { font-size: 1.8em; color: var(--dark); font-weight: 500; margin-bottom: 25px; font-family: 'Playfair Display', serif; }
-
-        /* BUNDLE BOX */
-        .bundle-box { background: linear-gradient(135deg, #ffffff 0%, #faf8f2 100%); border: 1px solid rgba(212, 175, 55, 0.4); padding: 60px 40px; text-align: center; border-radius: 20px; margin-top: 70px; box-shadow: 0 20px 50px rgba(212, 175, 55, 0.05); position: relative; overflow: hidden; }
-        .bundle-box::before { content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--gold-light); opacity: 0.15; border-radius: 50%; filter: blur(40px); }
-        .bundle-box h3 { margin-top: 0; font-size: 2.5em; color: var(--dark); letter-spacing: 1px; }
-        .bundle-box p { font-size: 1.1em; color: #666; margin-bottom: 35px; line-height: 1.6; }
 
         /* FAQ SECTION */
         .faq-container { max-width: 800px; margin: 0 auto; }
@@ -158,13 +152,15 @@
     <div id="quizModal" class="modal">
         <div class="modal-content" style="text-align: center;">
             <span class="close-btn" onclick="closeQuiz()">×</span>
-            <div id="quiz-q1">
-                <h3 style="color:var(--gold-dark); margin-top:0; font-size: 2em;">Discover Your Scent</h3>
-                <p style="color:#666; margin-bottom: 30px;">What is your ideal evening vibe?</p>
+            <div id="quiz-q1" style="display: flex; flex-direction: column; gap: 8px;">
+                <h3 style="color:var(--gold-dark); margin-top:0; font-size: 2em; margin-bottom: 5px;">Discover Your Scent</h3>
+                <p style="color:#666; margin-bottom: 20px;">What is your ideal signature vibe?</p>
                 <button class="btn-outline" onclick="nextQuiz('Golden Hour')">Luxurious & Elegant</button>
                 <button class="btn-outline" onclick="nextQuiz('Bamboo Zen')">Fresh & Relaxing</button>
                 <button class="btn-outline" onclick="nextQuiz('Vanilla Veil')">Sweet & Cozy</button>
                 <button class="btn-outline" onclick="nextQuiz('Misty Peaks')">Cool & Adventurous</button>
+                <button class="btn-outline" onclick="nextQuiz('Honey Dew')">Bright & Sun-kissed</button>
+                <button class="btn-outline" onclick="nextQuiz('Velvet Sky')" style="margin-bottom: 20px;">Soft & Dreamy</button>
             </div>
             <div id="quiz-result" style="display: none;">
                 <h3 style="color:#555; margin-top:0; font-size: 1.1em; letter-spacing: 2px; text-transform: uppercase;">Your Perfect Match</h3>
@@ -183,7 +179,7 @@
                     <img src="golden-hour.jpg" alt="Golden Hour">
                     <div class="notes-overlay">
                         <h4>Scent Profile</h4>
-                        <p><strong>Top:</strong> Bergamot, Citrus<br><strong>Heart:</strong> Jasmine<br><strong>Base:</strong> Wood, Musk</p>
+                        <p><strong>Top:</strong> Bergamot, Lavender<br><strong>Heart:</strong> Jasmine<br><strong>Base:</strong> Wood, Musk</p>
                     </div>
                 </div>
                 <h3>Golden Hour</h3>
@@ -233,15 +229,34 @@
                 <div class="price">₱175.00</div>
                 <button onclick="openOrderForm('Misty Peaks', 175)">Purchase Now</button>
             </div>
-        </div>
 
-        <div class="bundle-box fade-in">
-            <h3>The Master Collection</h3>
-            <p>Acquire the complete AURA wardrobe (All 4 Scents) for a curated price of <strong>₱650.00</strong>.</p>
-            <button onclick="openOrderForm('Master Collection (4 Scents)', 650)" style="max-width:300px;">Secure The Collection</button>
-            
-            <p style="margin-top:25px; font-size: 0.9em; color:#888;">Looking for just two? Choose any 2 scents for ₱330 at checkout.</p>
-            <button onclick="openOrderForm('Custom Duo Bundle (Any 2)', 330)" class="btn-outline" style="max-width:300px; padding: 12px;">Build Custom Duo</button>
+            <div class="product fade-in">
+                <div class="img-container">
+                    <img src="honey-dew.jpg" alt="Honey Dew">
+                    <div class="notes-overlay">
+                        <h4>Scent Profile</h4>
+                        <p><strong>Top:</strong> Honeysuckle, Peach<br><strong>Heart:</strong> Spring Blossoms<br><strong>Base:</strong> Sweet Nectar</p>
+                    </div>
+                </div>
+                <h3>Honey Dew</h3>
+                <p>Sweet, bright & sun-kissed</p>
+                <div class="price">₱175.00</div>
+                <button onclick="openOrderForm('Honey Dew', 175)">Purchase Now</button>
+            </div>
+
+            <div class="product fade-in">
+                <div class="img-container">
+                    <img src="velvet-sky.jpg" alt="Velvet Sky">
+                    <div class="notes-overlay">
+                        <h4>Scent Profile</h4>
+                        <p><strong>Top:</strong> Cloudberry, Pear<br><strong>Heart:</strong> Cotton Peony<br><strong>Base:</strong> Vanilla, Sandalwood</p>
+                    </div>
+                </div>
+                <h3>Velvet Sky</h3>
+                <p>Soft, airy, and dreamy</p>
+                <div class="price">₱175.00</div>
+                <button onclick="openOrderForm('Velvet Sky', 175)">Purchase Now</button>
+            </div>
         </div>
     </section>
 
@@ -258,27 +273,18 @@
     <section id="faq">
         <h2>Questions & Answers</h2>
         <div class="faq-container fade-in">
-            
             <div class="faq-item" onclick="toggleFaq(this)">
                 <h3 class="faq-question">How long does the scent last? <span class="faq-icon">+</span></h3>
                 <div class="faq-answer">Our fragrances are crafted as Eau de Parfum. This means they have a high concentration of premium perfume oils. You can expect them to last 6 to 8 hours on your skin, and even longer on your clothes!</div>
             </div>
-
             <div class="faq-item" onclick="toggleFaq(this)">
                 <h3 class="faq-question">Is delivery really free? <span class="faq-icon">+</span></h3>
                 <div class="faq-answer">Yes! We offer 100% free delivery exclusively within Baybay City. Just make sure to pin your location during the checkout process so our rider can find you easily.</div>
             </div>
-
             <div class="faq-item" onclick="toggleFaq(this)">
                 <h3 class="faq-question">How do I track my order? <span class="faq-icon">+</span></h3>
                 <div class="faq-answer">It is very simple. Just scroll up to the "Order Status" section on this website and type in the exact 11-digit phone number you used when you placed your order. It will show you live updates from our team!</div>
             </div>
-
-            <div class="faq-item" onclick="toggleFaq(this)">
-                <h3 class="faq-question">Can I buy a bundle with different scents? <span class="faq-icon">+</span></h3>
-                <div class="faq-answer">Absolutely. If you select the "Custom Duo Bundle", you can easily mix and match. Just type the names of the two scents you want in the Facebook/Notes box during checkout.</div>
-            </div>
-
         </div>
     </section>
 
@@ -321,9 +327,7 @@
             <span class="close-btn" onclick="closeOrderForm()">×</span>
             <div id="checkout-step-1">
                 <h2 style="margin: 0 0 10px; font-size: 2.2em;">Checkout</h2>
-                <p id="order-item-name" style="color:var(--gold-dark); font-weight:500; font-size: 1.2em; text-align:center; margin-bottom:10px;"></p>
-                
-                <p id="custom-duo-msg" style="display:none; text-align:center; font-size:0.85em; color:#666; margin-bottom:20px;">*Please specify which two scents you want in the Facebook Name/Notes box below.</p>
+                <p id="order-item-name" style="color:var(--gold-dark); font-weight:500; font-size: 1.2em; text-align:center; margin-bottom:20px;"></p>
                 
                 <input type="hidden" id="hidden-product"><input type="hidden" id="hidden-price">
                 <input type="text" id="order-name" placeholder="Full Name">
@@ -421,7 +425,7 @@
 
         // QUIZ LOGIC
         function startQuiz() {
-            document.getElementById('quiz-q1').style.display = 'block';
+            document.getElementById('quiz-q1').style.display = 'flex';
             document.getElementById('quiz-result').style.display = 'none';
             const modal = document.getElementById('quizModal');
             modal.style.display = 'flex';
@@ -449,12 +453,6 @@
             document.getElementById('hidden-product').value = p;
             document.getElementById('hidden-price').value = pr;
             document.getElementById('order-item-name').innerText = p;
-            
-            if(p === 'Custom Duo Bundle (Any 2)') {
-                document.getElementById('custom-duo-msg').style.display = 'block';
-            } else {
-                document.getElementById('custom-duo-msg').style.display = 'none';
-            }
             
             document.getElementById('checkout-step-1').style.display = 'block';
             document.getElementById('checkout-step-2').style.display = 'none';
